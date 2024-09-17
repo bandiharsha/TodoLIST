@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+// import React, { useState } from 'react';
+// import Login from './components/Login';
+// import TodoList from './components/TodoList';
+
+// const App = () => {
+//   const [token, setToken] = useState(localStorage.getItem('token'));
+
+//   if (!token) {
+//     return <Login setToken={(token) => { localStorage.setItem('token', token); setToken(token); }} />;
+//   }
+
+//   return <TodoList token={token} />;
+// };
+
+// export default App;
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import Login from './components/Login';
+import TodoList from './components/TodoList';
+ import Signup from './components/Signup';
+
 
 function App() {
+  const location = useLocation();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {/* Render NavBar only if the current route is not '/login' */}
+      <Routes>
+        
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/todolist" element={<TodoList/>} />
+
+      </Routes>
     </div>
   );
 }
 
-export default App;
+export default function Root() {
+  return (
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+}
