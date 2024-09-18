@@ -21,13 +21,15 @@ export default function Signup() {
         }
     
         try {
-            const response = await axios.post('http://localhost:4000/signup', {
+            const response = await axios.post('http://localhost:5000/signup', {
                 username: username, // Include username in the request
                 email: email,
                 password: password,
             });
     
             if (response.status === 201) {
+                const token = response.data.token; // Assuming the token is in the response data
+                localStorage.setItem('token', token); // Store the token in local storage
                 navigate('/todolist'); // Navigate to the login page on successful signup
             } else {
                 setError('Signup failed');
